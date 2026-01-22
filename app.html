@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VidaPLus - Sistema de Gestão Hospitalar</title>
+    <title>VidaPlus - Sistema de Gestão Hospitalar</title>
     
-    <!-- Tailwind CSS via CDN -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Fontes do Google -->
@@ -13,42 +13,37 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Ícones (Font Awesome) -->
+    <!-- Ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- CSS Personalizado -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏥</text></svg>">
 </head>
 <body class="font-sistema bg-cinza-50 text-cinza-800">
-    <!-- Container principal -->
     <div class="flex min-h-screen">
         
-        <!-- ============================================
-            SIDEBAR / MENU LATERAL
-        ============================================= -->
+        <!-- SIDEBAR -->
         <aside id="sidebar" class="sidebar-sistema hidden lg:block">
-            <!-- Logo do sistema -->
             <div class="logo-sistema p-6">
                 <div class="flex items-center gap-3">
                     <div class="logo-icon">
                         <i class="fas fa-hospital-alt text-xl"></i>
                     </div>
                     <div>
-                        <h1 class="logo-texto" style="color: #FFFFFF;">VidaPlus</h1 >
+                        <h1 class="logo-texto">VidaPlus</h1>
                         <p class="text-azul-claro text-xs mt-1">Sistema Hospitalar</p>
                     </div>
                 </div>
             </div>
             
-            <!-- Menu de navegação -->
             <nav class="px-4">
                 <div class="mb-6">
                     <p class="text-cinza-400 text-xs uppercase tracking-wider font-semibold mb-3 px-3">Menu Principal</p>
                     <div class="space-y-1">
-                        <a href="#" class="nav-item ativo">
+                        <a href="app.html" class="nav-item ativo">
                             <i class="nav-icon fas fa-home"></i>
                             Dashboard
                         </a>
@@ -112,7 +107,7 @@
                 </div>
             </nav>
             
-            <!-- Informação do usuário logado -->
+            <!-- Usuário logado -->
             <div class="p-4 border-t border-azul-escuro/30 mt-auto">
                 <div class="flex items-center gap-3 p-3 bg-azul-escuro/40 rounded-xl">
                     <div class="w-10 h-10 bg-azul-claro/20 rounded-full flex items-center justify-center">
@@ -122,7 +117,6 @@
                         <p class="font-semibold text-white">Dr. Silva</p>
                         <p class="text-azul-claro text-xs">Administrador</p>
                     </div>
-                    <!-- Botão de logout que volta para login -->
                     <button id="logout-btn" class="p-2 hover:bg-azul-escuro/50 rounded-lg transition-colors">
                         <i class="fas fa-sign-out-alt text-cinza-400"></i>
                     </button>
@@ -130,12 +124,10 @@
             </div>
         </aside>
         
-        <!-- ============================================
-            CONTEÚDO PRINCIPAL
-        ============================================= -->
+        <!-- CONTEÚDO PRINCIPAL -->
         <main class="flex-1 p-4 md:p-6 lg:p-8">
             
-            <!-- Header com busca e perfil -->
+            <!-- Header -->
             <header class="mb-8">
                 <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div>
@@ -144,7 +136,6 @@
                     </div>
                     
                     <div class="flex items-center gap-3">
-                        <!-- Campo de busca -->
                         <div class="relative">
                             <input type="text" 
                                    placeholder="Buscar no sistema..." 
@@ -152,18 +143,15 @@
                             <i class="fas fa-search absolute left-3 top-3 text-cinza-400"></i>
                         </div>
                         
-                        <!-- Botão de notificações -->
                         <button id="notifications-btn" class="relative p-2 hover:bg-cinza-100 rounded-lg transition-colors">
                             <i class="fas fa-bell text-xl text-cinza-600"></i>
                             <span class="absolute top-2 right-2 w-2 h-2 bg-laranja-alerta rounded-full"></span>
                         </button>
                         
-                        <!-- Botão de alternância de tema -->
                         <button id="theme-toggle" class="p-2 hover:bg-cinza-100 rounded-lg transition-colors">
                             <i id="theme-icon" class="fas fa-moon text-xl text-cinza-600"></i>
                         </button>
                         
-                        <!-- Botão para mostrar sidebar (mobile) -->
                         <button id="show-sidebar" class="lg:hidden p-2 bg-azul-principal text-white rounded-lg">
                             <i class="fas fa-bars"></i>
                         </button>
@@ -287,9 +275,7 @@
                         </select>
                     </div>
                     
-                    <!-- Gráfico simulado -->
                     <div class="h-64 flex items-end justify-between gap-1 mt-8">
-                        <!-- Barras do gráfico -->
                         <div class="flex flex-col items-center flex-1">
                             <div class="w-3/4 bg-azul-principal rounded-t-lg" style="height: 80%"></div>
                             <p class="mt-2 text-xs text-cinza-600">Seg</p>
@@ -337,9 +323,9 @@
                     <div class="p-6 border-b border-cinza-100">
                         <div class="flex items-center justify-between">
                             <h3 class="text-lg font-semibold text-cinza-800">Próximas Consultas</h3>
-                            <button class="text-azul-principal font-medium hover:text-azul-escuro transition-colors text-sm">
+                            <a href="agendamento-consulta.html" class="text-azul-principal font-medium hover:text-azul-escuro transition-colors text-sm">
                                 Ver todas →
-                            </button>
+                            </a>
                         </div>
                     </div>
                     
@@ -410,56 +396,17 @@
                                         </span>
                                     </td>
                                 </tr>
-                                
-                                <!-- Linha 4 -->
-                                <tr>
-                                    <td class="py-4">
-                                        <div class="flex items-center gap-3">
-                                            <div class="w-8 h-8 bg-roxo-secundario/10 rounded-full flex items-center justify-center">
-                                                <i class="fas fa-user text-roxo-secundario text-sm"></i>
-                                            </div>
-                                            <span class="font-medium">Pedro Silva</span>
-                                        </div>
-                                    </td>
-                                    <td class="py-4 font-medium">Dr. Marcelo Santos</td>
-                                    <td class="py-4 font-mono">14:30</td>
-                                    <td class="py-4">
-                                        <span class="badge-status badge-confirmado">
-                                            Confirmado
-                                        </span>
-                                    </td>
-                                </tr>
-                                
-                                <!-- Linha 5 -->
-                                <tr>
-                                    <td class="py-4">
-                                        <div class="flex items-center gap-3">
-                                            <div class="w-8 h-8 bg-azul-teal/10 rounded-full flex items-center justify-center">
-                                                <i class="fas fa-user text-azul-teal text-sm"></i>
-                                            </div>
-                                            <span class="font-medium">Juliana Pereira</span>
-                                        </div>
-                                    </td>
-                                    <td class="py-4 font-medium">Dra. Amanda Rocha</td>
-                                    <td class="py-4 font-mono">16:00</td>
-                                    <td class="py-4">
-                                        <span class="badge-status badge-pendente">
-                                            Pendente
-                                        </span>
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
                 </section>
             </div>
             
-            <!-- Atalhos rápidos - LINKS CORRIGIDOS -->
+            <!-- Atalhos rápidos -->
             <section class="mb-10">
                 <h3 class="text-lg font-semibold text-cinza-800 mb-6">Atalhos Rápidos</h3>
                 
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <!-- LINK PARA CADASTRO DE PACIENTE -->
                     <a href="cadastro-paciente.html" class="quick-link">
                         <div class="quick-link-icon bg-azul-principal/10 text-azul-principal">
                             <i class="fas fa-user-plus text-xl"></i>
@@ -467,7 +414,6 @@
                         <span class="font-medium mt-3">Novo Paciente</span>
                     </a>
                     
-                    <!-- LINK PARA AGENDAMENTO -->
                     <a href="agendamento-consulta.html" class="quick-link">
                         <div class="quick-link-icon bg-verde-sucesso/10 text-verde-sucesso">
                             <i class="fas fa-calendar-plus text-xl"></i>
@@ -495,8 +441,8 @@
             <footer class="border-t border-cinza-200 pt-6">
                 <div class="flex flex-col md:flex-row justify-between items-center gap-4">
                     <div class="text-center md:text-left">
-                        <p class="font-medium text-cinza-800">SGHSS - Sistema Hospitalar</p>
-                        <p class="text-sm text-cinza-600 mt-1">© 2023 - Projeto Multidisciplinar</p>
+                        <p class="font-medium text-cinza-800">VidaPlus - Sistema Hospitalar</p>
+                        <p class="text-sm text-cinza-600 mt-1">© 2024 - Projeto Multidisciplinar</p>
                     </div>
                     
                     <div class="flex items-center gap-4 text-sm">
@@ -548,22 +494,12 @@
                         <p class="text-xs text-cinza-500 mt-2">Há 5 horas</p>
                     </div>
                 </div>
-                
-                <div class="notification-item">
-                    <div class="notification-icon">
-                        <i class="fas fa-user-check text-verde-sucesso"></i>
-                    </div>
-                    <div class="flex-1">
-                        <p class="font-medium text-cinza-800">Paciente recebido</p>
-                        <p class="text-sm text-cinza-600 mt-1">Maria Santos chegou para sua consulta</p>
-                        <p class="text-xs text-cinza-500 mt-2">Hoje às 09:15</p>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
     
     <!-- JavaScript -->
+    <script src="js/script.js"></script>
     <script>
         // Menu mobile
         const menuToggle = document.getElementById('show-sidebar');
@@ -578,27 +514,12 @@
             });
         }
 
-        // Tema
-        const themeToggle = document.getElementById('theme-toggle');
-        if (themeToggle) {
-            themeToggle.addEventListener('click', () => {
-                const icon = themeToggle.querySelector('i');
-                if (icon.classList.contains('fa-moon')) {
-                    icon.classList.replace('fa-moon', 'fa-sun');
-                    document.body.classList.add('bg-cinza-900', 'text-white');
-                } else {
-                    icon.classList.replace('fa-sun', 'fa-moon');
-                    document.body.classList.remove('bg-cinza-900', 'text-white');
-                }
-            });
-        }
-
         // Logout
         const logoutBtn = document.getElementById('logout-btn');
         if (logoutBtn) {
             logoutBtn.addEventListener('click', () => {
                 if (confirm('Deseja realmente sair do sistema?')) {
-                    window.location.href = 'login.html';
+                    window.location.href = 'index.html';
                 }
             });
         }
@@ -623,30 +544,6 @@
                 }
             });
         }
-
-        // Ativar item do menu
-        document.querySelectorAll('.nav-item').forEach(item => {
-            item.addEventListener('click', function(e) {
-                // Verifica se é um link interno (#) ou externo
-                const href = this.getAttribute('href');
-                if (href && href.startsWith('#')) {
-                    e.preventDefault();
-                }
-                
-                // Remove classe ativo de todos
-                document.querySelectorAll('.nav-item').forEach(i => {
-                    i.classList.remove('ativo');
-                });
-                
-                // Adiciona classe ativo ao clicado
-                this.classList.add('ativo');
-                
-                // Fechar menu no mobile
-                if (window.innerWidth < 1024) {
-                    sidebar.classList.add('hidden');
-                }
-            });
-        });
     </script>
 </body>
 </html>
