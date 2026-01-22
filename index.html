@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VidaPLus - Sistema de Gestão Hospitalar</title>
+    
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fontes do Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Ícones (Font Awesome) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS Personalizado -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏥</text></svg>">
+</head>
+<body class="font-sistema bg-cinza-50 text-cinza-800">
+    <!-- Container principal -->
+    <div class="flex min-h-screen">
+        
+        <!-- ============================================
+            SIDEBAR / MENU LATERAL
+        ============================================= -->
+        <aside id="sidebar" class="sidebar-sistema hidden lg:block">
+            <!-- Logo do sistema -->
+            <div class="logo-sistema p-6">
+                <div class="flex items-center gap-3">
+                    <div class="logo-icon">
+                        <i class="fas fa-hospital-alt text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="logo-texto" style="color: #FFFFFF;">VidaPlus</h1 >
+                        <p class="text-azul-claro text-xs mt-1">Sistema Hospitalar</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Menu de navegação -->
+            <nav class="px-4">
+                <div class="mb-6">
+                    <p class="text-cinza-400 text-xs uppercase tracking-wider font-semibold mb-3 px-3">Menu Principal</p>
+                    <div class="space-y-1">
+                        <a href="#" class="nav-item ativo">
+                            <i class="nav-icon fas fa-home"></i>
+                            Dashboard
+                        </a>
+                        
+                        <a href="cadastro-paciente.html" class="nav-item">
+                            <i class="nav-icon fas fa-user-injured"></i>
+                            Pacientes
+                        </a>
+                        
+                        <a href="agendamento-consulta.html" class="nav-item">
+                            <i class="nav-icon fas fa-calendar-alt"></i>
+                            Agendamentos
+                        </a>
+                        
+                        <a href="#medicos" class="nav-item">
+                            <i class="nav-icon fas fa-user-md"></i>
+                            Médicos
+                        </a>
+                        
+                        <a href="#prontuarios" class="nav-item">
+                            <i class="nav-icon fas fa-clipboard-list"></i>
+                            Prontuários
+                        </a>
+                        
+                        <a href="#estoque" class="nav-item">
+                            <i class="nav-icon fas fa-pills"></i>
+                            Estoque
+                        </a>
+                        
+                        <a href="#financeiro" class="nav-item">
+                            <i class="nav-icon fas fa-chart-line"></i>
+                            Financeiro
+                        </a>
+                        
+                        <a href="#configuracoes" class="nav-item">
+                            <i class="nav-icon fas fa-cog"></i>
+                            Configurações
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Menu Relatórios -->
+                <div class="mb-6">
+                    <p class="text-cinza-400 text-xs uppercase tracking-wider font-semibold mb-3 px-3">Relatórios</p>
+                    <div class="space-y-1">
+                        <a href="#analises" class="nav-item">
+                            <i class="nav-icon fas fa-chart-pie"></i>
+                            Análises
+                        </a>
+                        
+                        <a href="#faturamento" class="nav-item">
+                            <i class="nav-icon fas fa-file-invoice"></i>
+                            Faturamento
+                        </a>
+                        
+                        <a href="#auditoria" class="nav-item">
+                            <i class="nav-icon fas fa-clipboard-check"></i>
+                            Auditoria
+                        </a>
+                    </div>
+                </div>
+            </nav>
+            
+            <!-- Informação do usuário logado -->
+            <div class="p-4 border-t border-azul-escuro/30 mt-auto">
+                <div class="flex items-center gap-3 p-3 bg-azul-escuro/40 rounded-xl">
+                    <div class="w-10 h-10 bg-azul-claro/20 rounded-full flex items-center justify-center">
+                        <i class="fas fa-user-md text-azul-claro"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="font-semibold text-white">Dr. Silva</p>
+                        <p class="text-azul-claro text-xs">Administrador</p>
+                    </div>
+                    <!-- Botão de logout que volta para login -->
+                    <button id="logout-btn" class="p-2 hover:bg-azul-escuro/50 rounded-lg transition-colors">
+                        <i class="fas fa-sign-out-alt text-cinza-400"></i>
+                    </button>
+                </div>
+            </div>
+        </aside>
+        
+        <!-- ============================================
+            CONTEÚDO PRINCIPAL
+        ============================================= -->
+        <main class="flex-1 p-4 md:p-6 lg:p-8">
+            
+            <!-- Header com busca e perfil -->
+            <header class="mb-8">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <h2 class="text-2xl md:text-3xl font-bold text-cinza-900">Dashboard Hospitalar</h2>
+                        <p class="text-cinza-600 mt-1">Bem-vindo ao sistema de gestão</p>
+                    </div>
+                    
+                    <div class="flex items-center gap-3">
+                        <!-- Campo de busca -->
+                        <div class="relative">
+                            <input type="text" 
+                                   placeholder="Buscar no sistema..." 
+                                   class="form-input pl-10 pr-4 w-full md:w-64">
+                            <i class="fas fa-search absolute left-3 top-3 text-cinza-400"></i>
+                        </div>
+                        
+                        <!-- Botão de notificações -->
+                        <button id="notifications-btn" class="relative p-2 hover:bg-cinza-100 rounded-lg transition-colors">
+                            <i class="fas fa-bell text-xl text-cinza-600"></i>
+                            <span class="absolute top-2 right-2 w-2 h-2 bg-laranja-alerta rounded-full"></span>
+                        </button>
+                        
+                        <!-- Botão de alternância de tema -->
+                        <button id="theme-toggle" class="p-2 hover:bg-cinza-100 rounded-lg transition-colors">
+                            <i id="theme-icon" class="fas fa-moon text-xl text-cinza-600"></i>
+                        </button>
+                        
+                        <!-- Botão para mostrar sidebar (mobile) -->
+                        <button id="show-sidebar" class="lg:hidden p-2 bg-azul-principal text-white rounded-lg">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Cards de estatísticas -->
+            <section class="mb-10">
+                <div class="flex flex-col md:flex-row md:items-center justify-between mb-6">
+                    <h3 class="text-xl font-semibold text-cinza-800 mb-2 md:mb-0">Visão Geral do Sistema</h3>
+                    <div class="flex items-center gap-2 text-sm text-cinza-600">
+                        <span>Última atualização:</span>
+                        <span class="font-medium">Hoje, 10:30</span>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Card 1: Pacientes Ativos -->
+                    <div class="card-estatistica card-verde">
+                        <div class="card-header">
+                            <div>
+                                <div class="card-titulo">Pacientes Ativos</div>
+                                <div class="card-valor">142</div>
+                                <div class="card-trend trend-positivo">
+                                    <i class="fas fa-arrow-up"></i>
+                                    <span>+12% este mês</span>
+                                </div>
+                            </div>
+                            <div class="card-icon">
+                                <i class="fas fa-user-injured"></i>
+                            </div>
+                        </div>
+                        <div class="mt-4 text-sm text-cinza-500">
+                            <i class="fas fa-info-circle mr-1"></i>
+                            32 novos pacientes esta semana
+                        </div>
+                    </div>
+                    
+                    <!-- Card 2: Consultas Hoje -->
+                    <div class="card-estatistica">
+                        <div class="card-header">
+                            <div>
+                                <div class="card-titulo">Consultas Hoje</div>
+                                <div class="card-valor">24</div>
+                                <div class="flex items-center gap-1 text-sm text-cinza-600 mt-1">
+                                    <i class="fas fa-clock"></i>
+                                    <span>8 pendentes</span>
+                                </div>
+                            </div>
+                            <div class="card-icon">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-cinza-600">Taxa de comparecimento:</span>
+                                <span class="font-semibold text-verde-sucesso">92%</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 3: Leitos Ocupados -->
+                    <div class="card-estatistica card-laranja">
+                        <div class="card-header">
+                            <div>
+                                <div class="card-titulo">Leitos Ocupados</div>
+                                <div class="card-valor">78%</div>
+                                <div class="card-trend trend-negativo">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <span>Capacidade moderada</span>
+                                </div>
+                            </div>
+                            <div class="card-icon">
+                                <i class="fas fa-bed"></i>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <div class="text-sm text-cinza-600">
+                                <div class="flex justify-between">
+                                    <span>Disponíveis: 45</span>
+                                    <span>Total: 210</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 4: Receita Mensal -->
+                    <div class="card-estatistica card-roxo">
+                        <div class="card-header">
+                            <div>
+                                <div class="card-titulo">Receita Mensal</div>
+                                <div class="card-valor">R$ 342k</div>
+                                <div class="card-trend trend-positivo">
+                                    <i class="fas fa-arrow-up"></i>
+                                    <span>+8% vs último mês</span>
+                                </div>
+                            </div>
+                            <div class="card-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                        </div>
+                        <div class="mt-4 text-sm text-cinza-500">
+                            Meta: R$ 400k | 85% alcançada
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Gráficos e Tabelas -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
+                
+                <!-- Gráfico de ocupação -->
+                <section class="grafico-container">
+                    <div class="grafico-header">
+                        <h3 class="text-lg font-semibold text-cinza-800">Ocupação Hospitalar</h3>
+                        <select class="form-input text-sm py-1">
+                            <option>Últimos 7 dias</option>
+                            <option>Último mês</option>
+                            <option>Último trimestre</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Gráfico simulado -->
+                    <div class="h-64 flex items-end justify-between gap-1 mt-8">
+                        <!-- Barras do gráfico -->
+                        <div class="flex flex-col items-center flex-1">
+                            <div class="w-3/4 bg-azul-principal rounded-t-lg" style="height: 80%"></div>
+                            <p class="mt-2 text-xs text-cinza-600">Seg</p>
+                        </div>
+                        <div class="flex flex-col items-center flex-1">
+                            <div class="w-3/4 bg-azul-principal rounded-t-lg" style="height: 95%"></div>
+                            <p class="mt-2 text-xs text-cinza-600">Ter</p>
+                        </div>
+                        <div class="flex flex-col items-center flex-1">
+                            <div class="w-3/4 bg-azul-principal rounded-t-lg" style="height: 70%"></div>
+                            <p class="mt-2 text-xs text-cinza-600">Qua</p>
+                        </div>
+                        <div class="flex flex-col items-center flex-1">
+                            <div class="w-3/4 bg-azul-principal rounded-t-lg" style="height: 90%"></div>
+                            <p class="mt-2 text-xs text-cinza-600">Qui</p>
+                        </div>
+                        <div class="flex flex-col items-center flex-1">
+                            <div class="w-3/4 bg-azul-principal rounded-t-lg" style="height: 60%"></div>
+                            <p class="mt-2 text-xs text-cinza-600">Sex</p>
+                        </div>
+                        <div class="flex flex-col items-center flex-1">
+                            <div class="w-3/4 bg-azul-principal rounded-t-lg" style="height: 85%"></div>
+                            <p class="mt-2 text-xs text-cinza-600">Sáb</p>
+                        </div>
+                        <div class="flex flex-col items-center flex-1">
+                            <div class="w-3/4 bg-azul-principal rounded-t-lg" style="height: 50%"></div>
+                            <p class="mt-2 text-xs text-cinza-600">Dom</p>
+                        </div>
+                    </div>
+                    
+                    <div class="grafico-legenda mt-6">
+                        <div class="legenda-item">
+                            <div class="legenda-cor bg-azul-principal"></div>
+                            <span class="text-sm text-cinza-600">Leitos Ocupados</span>
+                        </div>
+                        <div class="legenda-item">
+                            <div class="legenda-cor bg-cinza-300"></div>
+                            <span class="text-sm text-cinza-600">Leitos Disponíveis</span>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Lista de consultas agendadas -->
+                <section class="tabela-container">
+                    <div class="p-6 border-b border-cinza-100">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-lg font-semibold text-cinza-800">Próximas Consultas</h3>
+                            <button class="text-azul-principal font-medium hover:text-azul-escuro transition-colors text-sm">
+                                Ver todas →
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="tabela-sistema">
+                            <thead>
+                                <tr>
+                                    <th>Paciente</th>
+                                    <th>Médico</th>
+                                    <th>Horário</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Linha 1 -->
+                                <tr>
+                                    <td class="py-4">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-8 h-8 bg-azul-principal/10 rounded-full flex items-center justify-center">
+                                                <i class="fas fa-user text-azul-principal text-sm"></i>
+                                            </div>
+                                            <span class="font-medium">Maria Santos</span>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 font-medium">Dra. Carla Mendes</td>
+                                    <td class="py-4 font-mono">09:30</td>
+                                    <td class="py-4">
+                                        <span class="badge-status badge-confirmado">
+                                            Confirmado
+                                        </span>
+                                    </td>
+                                </tr>
+                                
+                                <!-- Linha 2 -->
+                                <tr>
+                                    <td class="py-4">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-8 h-8 bg-verde-sucesso/10 rounded-full flex items-center justify-center">
+                                                <i class="fas fa-user text-verde-sucesso text-sm"></i>
+                                            </div>
+                                            <span class="font-medium">João Oliveira</span>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 font-medium">Dr. Roberto Alves</td>
+                                    <td class="py-4 font-mono">10:15</td>
+                                    <td class="py-4">
+                                        <span class="badge-status badge-pendente">
+                                            Pendente
+                                        </span>
+                                    </td>
+                                </tr>
+                                
+                                <!-- Linha 3 -->
+                                <tr>
+                                    <td class="py-4">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-8 h-8 bg-laranja-alerta/10 rounded-full flex items-center justify-center">
+                                                <i class="fas fa-user text-laranja-alerta text-sm"></i>
+                                            </div>
+                                            <span class="font-medium">Ana Costa</span>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 font-medium">Dra. Fernanda Lima</td>
+                                    <td class="py-4 font-mono">11:00</td>
+                                    <td class="py-4">
+                                        <span class="badge-status badge-cancelado">
+                                            Cancelado
+                                        </span>
+                                    </td>
+                                </tr>
+                                
+                                <!-- Linha 4 -->
+                                <tr>
+                                    <td class="py-4">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-8 h-8 bg-roxo-secundario/10 rounded-full flex items-center justify-center">
+                                                <i class="fas fa-user text-roxo-secundario text-sm"></i>
+                                            </div>
+                                            <span class="font-medium">Pedro Silva</span>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 font-medium">Dr. Marcelo Santos</td>
+                                    <td class="py-4 font-mono">14:30</td>
+                                    <td class="py-4">
+                                        <span class="badge-status badge-confirmado">
+                                            Confirmado
+                                        </span>
+                                    </td>
+                                </tr>
+                                
+                                <!-- Linha 5 -->
+                                <tr>
+                                    <td class="py-4">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-8 h-8 bg-azul-teal/10 rounded-full flex items-center justify-center">
+                                                <i class="fas fa-user text-azul-teal text-sm"></i>
+                                            </div>
+                                            <span class="font-medium">Juliana Pereira</span>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 font-medium">Dra. Amanda Rocha</td>
+                                    <td class="py-4 font-mono">16:00</td>
+                                    <td class="py-4">
+                                        <span class="badge-status badge-pendente">
+                                            Pendente
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+            
+            <!-- Atalhos rápidos - LINKS CORRIGIDOS -->
+            <section class="mb-10">
+                <h3 class="text-lg font-semibold text-cinza-800 mb-6">Atalhos Rápidos</h3>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <!-- LINK PARA CADASTRO DE PACIENTE -->
+                    <a href="cadastro-paciente.html" class="quick-link">
+                        <div class="quick-link-icon bg-azul-principal/10 text-azul-principal">
+                            <i class="fas fa-user-plus text-xl"></i>
+                        </div>
+                        <span class="font-medium mt-3">Novo Paciente</span>
+                    </a>
+                    
+                    <!-- LINK PARA AGENDAMENTO -->
+                    <a href="agendamento-consulta.html" class="quick-link">
+                        <div class="quick-link-icon bg-verde-sucesso/10 text-verde-sucesso">
+                            <i class="fas fa-calendar-plus text-xl"></i>
+                        </div>
+                        <span class="font-medium mt-3">Nova Consulta</span>
+                    </a>
+                    
+                    <a href="#laudo" class="quick-link">
+                        <div class="quick-link-icon bg-laranja-alerta/10 text-laranja-alerta">
+                            <i class="fas fa-file-medical text-xl"></i>
+                        </div>
+                        <span class="font-medium mt-3">Emitir Laudo</span>
+                    </a>
+                    
+                    <a href="#relatorios" class="quick-link">
+                        <div class="quick-link-icon bg-roxo-secundario/10 text-roxo-secundario">
+                            <i class="fas fa-chart-pie text-xl"></i>
+                        </div>
+                        <span class="font-medium mt-3">Relatórios</span>
+                    </a>
+                </div>
+            </section>
+            
+            <!-- Footer -->
+            <footer class="border-t border-cinza-200 pt-6">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div class="text-center md:text-left">
+                        <p class="font-medium text-cinza-800">SGHSS - Sistema Hospitalar</p>
+                        <p class="text-sm text-cinza-600 mt-1">© 2023 - Projeto Multidisciplinar</p>
+                    </div>
+                    
+                    <div class="flex items-center gap-4 text-sm">
+                        <a href="#" class="text-cinza-600 hover:text-azul-principal transition-colors">
+                            Privacidade
+                        </a>
+                        <span class="text-cinza-300">•</span>
+                        <a href="#" class="text-cinza-600 hover:text-azul-principal transition-colors">
+                            Termos
+                        </a>
+                        <span class="text-cinza-300">•</span>
+                        <a href="#" class="text-cinza-600 hover:text-azul-principal transition-colors">
+                            Suporte
+                        </a>
+                    </div>
+                </div>
+            </footer>
+        </main>
+    </div>
+    
+    <!-- Modal de notificações -->
+    <div id="notifications-modal" class="modal-overlay hidden">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 class="text-lg font-semibold text-cinza-800">Notificações</h3>
+                <button id="close-modal" class="p-1 hover:bg-cinza-100 rounded-lg">
+                    <i class="fas fa-times text-cinza-500"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="notification-item">
+                    <div class="notification-icon">
+                        <i class="fas fa-calendar-check text-azul-principal"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="font-medium text-cinza-800">Nova consulta agendada</p>
+                        <p class="text-sm text-cinza-600 mt-1">Dr. Silva agendou uma consulta para amanhã às 10h</p>
+                        <p class="text-xs text-cinza-500 mt-2">Há 2 horas</p>
+                    </div>
+                </div>
+                
+                <div class="notification-item">
+                    <div class="notification-icon">
+                        <i class="fas fa-exclamation-triangle text-laranja-alerta"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="font-medium text-cinza-800">Estoque baixo</p>
+                        <p class="text-sm text-cinza-600 mt-1">Máscaras cirúrgicas estão com estoque crítico</p>
+                        <p class="text-xs text-cinza-500 mt-2">Há 5 horas</p>
+                    </div>
+                </div>
+                
+                <div class="notification-item">
+                    <div class="notification-icon">
+                        <i class="fas fa-user-check text-verde-sucesso"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="font-medium text-cinza-800">Paciente recebido</p>
+                        <p class="text-sm text-cinza-600 mt-1">Maria Santos chegou para sua consulta</p>
+                        <p class="text-xs text-cinza-500 mt-2">Hoje às 09:15</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- JavaScript -->
+    <script>
+        // Menu mobile
+        const menuToggle = document.getElementById('show-sidebar');
+        const sidebar = document.getElementById('sidebar');
+        
+        if (menuToggle && sidebar) {
+            menuToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('hidden');
+                sidebar.classList.toggle('fixed');
+                sidebar.classList.toggle('z-50');
+                sidebar.classList.toggle('inset-0');
+            });
+        }
+
+        // Tema
+        const themeToggle = document.getElementById('theme-toggle');
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                const icon = themeToggle.querySelector('i');
+                if (icon.classList.contains('fa-moon')) {
+                    icon.classList.replace('fa-moon', 'fa-sun');
+                    document.body.classList.add('bg-cinza-900', 'text-white');
+                } else {
+                    icon.classList.replace('fa-sun', 'fa-moon');
+                    document.body.classList.remove('bg-cinza-900', 'text-white');
+                }
+            });
+        }
+
+        // Logout
+        const logoutBtn = document.getElementById('logout-btn');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', () => {
+                if (confirm('Deseja realmente sair do sistema?')) {
+                    window.location.href = 'login.html';
+                }
+            });
+        }
+
+        // Notificações
+        const notificationsBtn = document.getElementById('notifications-btn');
+        const modal = document.getElementById('notifications-modal');
+        const closeModal = document.getElementById('close-modal');
+        
+        if (notificationsBtn && modal && closeModal) {
+            notificationsBtn.addEventListener('click', () => {
+                modal.classList.remove('hidden');
+            });
+            
+            closeModal.addEventListener('click', () => {
+                modal.classList.add('hidden');
+            });
+            
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.add('hidden');
+                }
+            });
+        }
+
+        // Ativar item do menu
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                // Verifica se é um link interno (#) ou externo
+                const href = this.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    e.preventDefault();
+                }
+                
+                // Remove classe ativo de todos
+                document.querySelectorAll('.nav-item').forEach(i => {
+                    i.classList.remove('ativo');
+                });
+                
+                // Adiciona classe ativo ao clicado
+                this.classList.add('ativo');
+                
+                // Fechar menu no mobile
+                if (window.innerWidth < 1024) {
+                    sidebar.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

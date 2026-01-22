@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGHSS - Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --azul-principal: #0056A6;
+            --azul-escuro: #003D7A;
+            --verde: #00A859;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #f0f7ff 0%, #e6f0ff 100%);
+            min-height: 100vh;
+        }
+        
+        .login-container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0, 86, 166, 0.1);
+            border: 1px solid rgba(0, 86, 166, 0.1);
+        }
+        
+        .btn-login {
+            background: linear-gradient(135deg, var(--azul-principal), var(--azul-escuro));
+            color: white;
+            font-weight: 600;
+            padding: 12px 24px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 86, 166, 0.3);
+        }
+        
+        .input-field {
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            padding: 12px 16px;
+            transition: all 0.3s;
+        }
+        
+        .input-field:focus {
+            border-color: var(--azul-principal);
+            box-shadow: 0 0 0 3px rgba(0, 86, 166, 0.1);
+        }
+        
+        /* Mensagem de feedback */
+        .feedback-message {
+            display: none;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 16px;
+            font-size: 14px;
+        }
+        
+        .feedback-success {
+            background-color: #d1fae5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+        }
+        
+        .feedback-error {
+            background-color: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center p-4">
+    <div class="login-container w-full max-w-md p-8">
+        <!-- Logo -->
+        <div class="text-center mb-8">
+            <div class="w-16 h-16 bg-[#0056A6] rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <i class="fas fa-hospital-alt text-white text-2xl"></i>
+            </div>
+            <h1 class="text-2xl font-bold text-gray-800">SGHSS</h1>
+            <p class="text-gray-600 mt-2">Sistema de Gestão Hospitalar</p>
+        </div>
+
+        <!-- Mensagem de feedback -->
+        <div id="feedback" class="feedback-message">
+            <i class="fas fa-info-circle mr-2"></i>
+            <span id="feedback-text"></span>
+        </div>
+
+        <!-- Formulário de Login -->
+        <form id="loginForm">
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        <i class="fas fa-user mr-2"></i>Usuário
+                    </label>
+                    <input type="text" 
+                           class="input-field w-full"
+                           placeholder="Digite seu usuário"
+                           id="usuario"
+                           required>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        <i class="fas fa-lock mr-2"></i>Senha
+                    </label>
+                    <input type="password" 
+                           class="input-field w-full"
+                           placeholder="Digite sua senha"
+                           id="senha"
+                           required>
+                </div>
+                
+                <div class="flex items-center justify-between">
+                    <label class="flex items-center">
+                        <input type="checkbox" class="rounded border-gray-300 text-[#0056A6] focus:ring-[#0056A6]">
+                        <span class="ml-2 text-sm text-gray-600">Lembrar-me</span>
+                    </label>
+                    <a href="#" class="text-sm text-[#0056A6] hover:text-[#003D7A]">
+                        Esqueceu a senha?
+                    </a>
+                </div>
+            </div>
+
+            <!-- Botão de Login -->
+            <button type="submit" class="btn-login w-full mt-6">
+                <i class="fas fa-sign-in-alt mr-2"></i>Entrar no Sistema
+            </button>
+        </form>
+
+        <!-- Informações de teste -->
+        <div class="mt-8 pt-6 border-t border-gray-200 text-center">
+            <p class="text-sm text-gray-600 mb-2">
+                <i class="fas fa-info-circle text-[#0056A6] mr-2"></i>
+                Usuários para teste:
+            </p>
+            <!-- <div class="text-xs text-gray-500 space-y-1">
+                <p><span class="font-medium">Administrador:</span> admin / senha123</p>
+                <p><span class="font-medium">Médico:</span> medico / medico123</p>
+                <p><span class="font-medium">Recepcionista:</span> recepcao / recepcao123</p>
+            </div>-->
+        </div>
+
+        <!-- Informações -->
+        <div class="mt-6 text-center text-xs text-gray-500">
+            <p>© 2024 SGHSS - Sistema de Gestão Hospitalar</p>
+            <p class="mt-1">Versão 2.0</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const usuarioInput = document.getElementById('usuario');
+            const senhaInput = document.getElementById('senha');
+            const feedbackDiv = document.getElementById('feedback');
+            const feedbackText = document.getElementById('feedback-text');
+            
+            // Usuários válidos para teste
+            const usuariosValidos = {
+                'admin': 'senha123',
+                'medico': 'medico123',
+                'recepcao': 'recepcao123',
+                'dr.silva': 'hospital2024',
+                'enfermeira': 'enfermagem123'
+            };
+            
+            const usuario = usuarioInput.value.trim();
+            const senha = senhaInput.value.trim();
+            
+            // Mostrar mensagem de erro se campos vazios
+            if (!usuario || !senha) {
+                feedbackText.innerHTML = 'Por favor, preencha todos os campos.';
+                feedbackDiv.className = 'feedback-message feedback-error';
+                feedbackDiv.style.display = 'block';
+                return;
+            }
+            
+            // Verificar se o usuário existe
+            if (usuariosValidos[usuario.toLowerCase()]) {
+                // Verificar senha
+                if (senha === usuariosValidos[usuario.toLowerCase()]) {
+                    // Login válido
+                    const btn = this.querySelector('button');
+                    const originalText = btn.innerHTML;
+                    btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Entrando...';
+                    btn.disabled = true;
+                    
+                    // Mostrar mensagem de sucesso
+                    feedbackText.innerHTML = 'Login realizado com sucesso! Redirecionando...';
+                    feedbackDiv.className = 'feedback-message feedback-success';
+                    feedbackDiv.style.display = 'block';
+                    
+                    // Redirecionar após 1.5 segundos
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 1500);
+                    
+                } else {
+                    // Senha incorreta
+                    feedbackText.innerHTML = 'Senha incorreta. Tente novamente.';
+                    feedbackDiv.className = 'feedback-message feedback-error';
+                    feedbackDiv.style.display = 'block';
+                    senhaInput.value = '';
+                    senhaInput.focus();
+                }
+            } else {
+                // Usuário não existe
+                feedbackText.innerHTML = 'Usuário não encontrado.';
+                feedbackDiv.className = 'feedback-message feedback-error';
+                feedbackDiv.style.display = 'block';
+                usuarioInput.value = '';
+                senhaInput.value = '';
+                usuarioInput.focus();
+            }
+        });
+        
+        // Limpar mensagem de erro ao começar a digitar
+        document.getElementById('usuario').addEventListener('input', function() {
+            document.getElementById('feedback').style.display = 'none';
+        });
+        
+        document.getElementById('senha').addEventListener('input', function() {
+            document.getElementById('feedback').style.display = 'none';
+        });
+    </script>
+</body>
+</html>

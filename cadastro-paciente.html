@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGHSS - Cadastro de Paciente</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --azul-principal: #0056A6;
+            --azul-escuro: #003D7A;
+            --verde: #00A859;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #f8fafc;
+        }
+        
+        .header-bg {
+            background: linear-gradient(135deg, var(--azul-principal), var(--azul-escuro));
+        }
+        
+        .form-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e5e7eb;
+        }
+        
+        .input-form {
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            padding: 10px 14px;
+            transition: all 0.3s;
+        }
+        
+        .input-form:focus {
+            border-color: var(--azul-principal);
+            box-shadow: 0 0 0 3px rgba(0, 86, 166, 0.1);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--azul-principal), var(--azul-escuro));
+            color: white;
+            font-weight: 600;
+            padding: 12px 24px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 86, 166, 0.3);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: var(--azul-principal);
+            border: 2px solid var(--azul-principal);
+            font-weight: 600;
+            padding: 10px 22px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--azul-principal);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header-bg text-white">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <!-- Link para voltar ao Dashboard -->
+                    <a href="index.html" class="text-white hover:text-gray-200">
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                    <div>
+                        <h1 class="text-xl font-bold">VidaPlus</h1>
+                        <p class="text-sm opacity-90">Cadastro de Paciente</p>
+                    </div>
+                </div>
+                <div class="text-sm">
+                    <i class="fas fa-user-md mr-2"></i>
+                    <span>Dr. Silva</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="max-w-4xl mx-auto">
+            <!-- Card do Formulário -->
+            <div class="form-card p-6">
+                <!-- Cabeçalho do Form -->
+                <div class="mb-8">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-2">
+                        <i class="fas fa-user-plus text-[#0056A6] mr-2"></i>
+                        Novo Paciente
+                    </h2>
+                    <p class="text-gray-600">Preencha os dados do paciente abaixo</p>
+                </div>
+
+                <!-- Formulário -->
+                <form id="formPaciente">
+                    <!-- Dados Pessoais -->
+                    <div class="mb-8">
+                        <h3 class="text-lg font-semibold text-gray-700 mb-4 pb-2 border-b">
+                            <i class="fas fa-id-card mr-2"></i>Dados Pessoais
+                        </h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Nome Completo -->
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">
+                                    Nome Completo *
+                                </label>
+                                <input type="text" 
+                                       class="input-form w-full"
+                                       placeholder="Digite o nome completo"
+                                       required>
+                            </div>
+                            
+                            <!-- CPF -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">
+                                    CPF *
+                                </label>
+                                <input type="text" 
+                                       class="input-form w-full"
+                                       placeholder="000.000.000-00"
+                                       required>
+                            </div>
+                            
+                            <!-- Data de Nascimento -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">
+                                    Data de Nascimento *
+                                </label>
+                                <input type="date" 
+                                       class="input-form w-full"
+                                       required>
+                            </div>
+                            
+                            <!-- Sexo -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">
+                                    Sexo *
+                                </label>
+                                <select class="input-form w-full" required>
+                                    <option value="">Selecione</option>
+                                    <option value="M">Masculino</option>
+                                    <option value="F">Feminino</option>
+                                    <option value="O">Outro</option>
+                                </select>
+                            </div>
+                            
+                            <!-- Telefone -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">
+                                    Telefone *
+                                </label>
+                                <input type="tel" 
+                                       class="input-form w-full"
+                                       placeholder="(11) 99999-9999"
+                                       required>
+                            </div>
+                            
+                            <!-- Email -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">
+                                    Email
+                                </label>
+                                <input type="email" 
+                                       class="input-form w-full"
+                                       placeholder="paciente@email.com">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Endereço -->
+                    <div class="mb-8">
+                        <h3 class="text-lg font-semibold text-gray-700 mb-4 pb-2 border-b">
+                            <i class="fas fa-home mr-2"></i>Endereço
+                        </h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <!-- CEP -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">
+                                    CEP *
+                                </label>
+                                <input type="text" 
+                                       class="input-form w-full"
+                                       placeholder="00000-000"
+                                       required>
+                            </div>
+                            
+                            <!-- Endereço -->
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">
+                                    Endereço *
+                                </label>
+                                <input type="text" 
+                                       class="input-form w-full"
+                                       placeholder="Rua, Avenida, etc."
+                                       required>
+                            </div>
+                            
+                            <!-- Número -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">
+                                    Número *
+                                </label>
+                                <input type="text" 
+                                       class="input-form w-full"
+                                       placeholder="123"
+                                       required>
+                            </div>
+                            
+                            <!-- Complemento -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">
+                                    Complemento
+                                </label>
+                                <input type="text" 
+                                       class="input-form w-full"
+                                       placeholder="Apto, Bloco, etc.">
+                            </div>
+                            
+                            <!-- Bairro -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">
+                                    Bairro *
+                                </label>
+                                <input type="text" 
+                                       class="input-form w-full"
+                                       placeholder="Bairro"
+                                       required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Informações Médicas -->
+                    <div class="mb-8">
+                        <h3 class="text-lg font-semibold text-gray-700 mb-4 pb-2 border-b">
+                            <i class="fas fa-heartbeat mr-2"></i>Informações Médicas
+                        </h3>
+                        
+                        <div class="space-y-4">
+                            <!-- Tipo Sanguíneo -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">
+                                    Tipo Sanguíneo
+                                </label>
+                                <select class="input-form w-full">
+                                    <option value="">Selecione</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A">A-</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B">B-</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="AB">AB-</option>
+                                    <option value="O+">O+</option>
+                                    <option value="O">O-</option>
+                                </select>
+                            </div>
+                            
+                            <!-- Alergias -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">
+                                    Alergias Conhecidas
+                                </label>
+                                <textarea class="input-form w-full h-24" 
+                                          placeholder="Liste as alergias do paciente"></textarea>
+                            </div>
+                            
+                            <!-- Observações -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">
+                                    Observações
+                                </label>
+                                <textarea class="input-form w-full h-32" 
+                                          placeholder="Informações adicionais importantes"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Botões -->
+                    <div class="flex flex-col sm:flex-row gap-4 pt-6 border-t">
+                        <!-- Botão Cancelar volta para Dashboard -->
+                        <button type="button" 
+                                class="btn-secondary flex-1"
+                                onclick="window.location.href='index.html'">
+                            <i class="fas fa-times mr-2"></i>Cancelar
+                        </button>
+                        <button type="submit" class="btn-primary flex-1">
+                            <i class="fas fa-save mr-2"></i>Cadastrar Paciente
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Informações -->
+            <div class="mt-6 text-center text-sm text-gray-500">
+                <p>
+                    <i class="fas fa-shield-alt mr-2"></i>
+                    Todos os dados são armazenados com segurança
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('formPaciente').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Simula o cadastro
+            const btn = this.querySelector('button[type="submit"]');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Cadastrando...';
+            btn.disabled = true;
+            
+            // Simula delay do cadastro
+            setTimeout(() => {
+                alert('Paciente cadastrado com sucesso!');
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                this.reset();
+                
+                // Opção para ir direto para agendamento
+                const redirecionar = confirm('Deseja agendar uma consulta para este paciente?');
+                if (redirecionar) {
+                    window.location.href = 'agendamento-consulta.html';
+                }
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
