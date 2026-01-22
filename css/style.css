@@ -1,12 +1,8 @@
 /* ============================================
    ESTILOS SISTEMA HOSPITALAR - CSS MODERNO
-   Design inspirado em interfaces médicas premium
    ============================================ */
 
-/* ============================================
-   VARIÁVEIS DE DESIGN SISTÊMICO
-   ============================================ */
-:root {
+=:root {
   /* Cores principais do sistema */
   --azul-principal: #0056A6;
   --azul-escuro: #003D7A;
@@ -21,7 +17,6 @@
   --roxo-secundario: #6A1B9A;
   --azul-teal: #00B8D4;
   
-  /* Escala de cinza profissional */
   --cinza-50: #F9FAFB;
   --cinza-100: #F3F4F6;
   --cinza-200: #E5E7EB;
@@ -68,9 +63,7 @@
   --espaco-2xl: 3rem;
 }
 
-/* ============================================
-   RESET E CONFIGURAÇÕES BASE
-   ============================================ */
+/* RESET E CONFIGURAÇÕES BASE */
 * {
   margin: 0;
   padding: 0;
@@ -91,11 +84,8 @@ body {
   overflow-x: hidden;
 }
 
-/* ============================================
-   TIPOGRAFIA SISTÊMICA
-   ============================================ */
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Montserrat', 'Inter', system-ui, sans-serif;
+=h1, h2, h3, h4, h5, h6 {
+  font-family: 'Inter', system-ui, sans-serif;
   font-weight: 600;
   line-height: 1.2;
   color: var(--cinza-900);
@@ -139,19 +129,14 @@ p {
   line-height: 1.7;
 }
 
-/* ============================================
-   COMPONENTES DO SISTEMA
-   ============================================ */
+/* COMPONENTES DO SISTEMA */
 
 /* --- SIDEBAR / MENU LATERAL --- */
 .sidebar-sistema {
   background: var(--azul-principal);
   color: white;
-  position: fixed;
   height: 100vh;
   width: 280px;
-  padding: var(--espaco-xl);
-  z-index: 1000;
   transition: transform var(--transicao-normal);
   box-shadow: var(--sombra-forte);
 }
@@ -162,12 +147,12 @@ p {
   gap: var(--espaco-sm);
   margin-bottom: var(--espaco-2xl);
   padding-bottom: var(--espaco-lg);
-  border-bottom: 1px solid rgba(10, 33, 211, 0.244);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .logo-icon {
   font-size: 2rem;
-  background: rgba(0, 8, 162, 0.484);
+  background: rgba(255, 255, 255, 0.1);
   width: 50px;
   height: 50px;
   border-radius: var(--borda-md);
@@ -180,6 +165,7 @@ p {
   font-size: 1.5rem;
   font-weight: 700;
   letter-spacing: -0.5px;
+  color: white;
 }
 
 /* Itens de navegação */
@@ -430,46 +416,6 @@ p {
   border-radius: var(--borda-sm);
 }
 
-/* --- BOTÕES --- */
-.btn-primario {
-  background: var(--gradiente-azul);
-  color: white;
-  border: none;
-  padding: 12px 24px;
-  border-radius: var(--borda-md);
-  font-weight: 600;
-  font-size: 0.875rem;
-  cursor: pointer;
-  transition: all var(--transicao-normal);
-  display: inline-flex;
-  align-items: center;
-  gap: var(--espaco-sm);
-  box-shadow: 0 4px 12px rgba(0, 86, 166, 0.2);
-}
-
-.btn-primario:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 86, 166, 0.3);
-}
-
-.btn-secundario {
-  background: white;
-  color: var(--azul-principal);
-  border: 2px solid var(--azul-principal);
-  padding: 10px 22px;
-  border-radius: var(--borda-md);
-  font-weight: 600;
-  font-size: 0.875rem;
-  cursor: pointer;
-  transition: all var(--transicao-normal);
-}
-
-.btn-secundario:hover {
-  background: var(--azul-principal);
-  color: white;
-  transform: translateY(-2px);
-}
-
 /* --- FORMULÁRIOS --- */
 .form-group {
   margin-bottom: var(--espaco-lg);
@@ -538,9 +484,65 @@ p {
   padding: var(--espaco-xl);
 }
 
-/* ============================================
-   ANIMAÇÕES
-   ============================================ */
+/* NOTIFICAÇÕES */
+.notification-item {
+  display: flex;
+  gap: var(--espaco-md);
+  padding: var(--espaco-md);
+  border-bottom: 1px solid var(--cinza-200);
+  transition: background-color var(--transicao-rapida);
+}
+
+.notification-item:hover {
+  background-color: var(--cinza-50);
+}
+
+.notification-item:last-child {
+  border-bottom: none;
+}
+
+.notification-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--borda-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+}
+
+/* ATALHOS RÁPIDOS */
+.quick-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--espaco-xl);
+  background: white;
+  border-radius: var(--borda-lg);
+  text-decoration: none;
+  color: var(--cinza-700);
+  transition: all var(--transicao-normal);
+  border: 1px solid var(--cinza-100);
+  text-align: center;
+}
+
+.quick-link:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--sombra-destaque);
+  border-color: var(--azul-claro);
+}
+
+.quick-link-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: var(--borda-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+/* ANIMAÇÕES */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -573,9 +575,7 @@ p {
   50% { opacity: 0.5; }
 }
 
-/* ============================================
-   UTILITÁRIOS
-   ============================================ */
+/* UTILITÁRIOS */
 .text-destaque {
   color: var(--azul-principal);
   font-weight: 600;
@@ -605,9 +605,7 @@ p {
   background: rgba(243, 111, 33, 0.1);
 }
 
-/* ============================================
-   RESPONSIVIDADE
-   ============================================ */
+/* RESPONSIVIDADE */
 @media (max-width: 1024px) {
   .sidebar-sistema {
     transform: translateX(-100%);
@@ -646,78 +644,4 @@ p {
   .modal-container {
     max-height: 80vh;
   }
-}
-
-/* ============================================
-   ESTILOS ESPECÍFICOS DO SISTEMA
-   ============================================ */
-.secao-sistema {
-  margin-bottom: var(--espaco-2xl);
-}
-
-.secao-titulo {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: var(--espaco-xl);
-}
-
-.grid-sistema {
-  display: grid;
-  gap: var(--espaco-xl);
-}
-
-.grid-2-colunas {
-  grid-template-columns: repeat(2, 1fr);
-}
-
-.grid-4-colunas {
-  grid-template-columns: repeat(4, 1fr);
-}
-
-/* Efeito de loading */
-.loading {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  border: 2px solid var(--cinza-300);
-  border-radius: 50%;
-  border-top-color: var(--azul-principal);
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-/* Tooltip */
-.tooltip {
-  position: relative;
-}
-
-.tooltip:hover::after {
-  content: attr(data-tooltip);
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: var(--espaco-sm) var(--espaco-md);
-  background: var(--cinza-800);
-  color: white;
-  border-radius: var(--borda-sm);
-  font-size: 0.75rem;
-  white-space: nowrap;
-  z-index: 1000;
-  margin-bottom: var(--espaco-xs);
-}
-
-.tooltip:hover::before {
-  content: '';
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  border: 6px solid transparent;
-  border-top-color: var(--cinza-800);
-  margin-bottom: -8px;
 }
