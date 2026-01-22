@@ -3,23 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SGHSS - Cadastro de Paciente</title>
+    <title>VidaPlus - Cadastro de Paciente</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
     <style>
-        :root {
-            --azul-principal: #0056A6;
-            --azul-escuro: #003D7A;
-            --verde: #00A859;
-        }
-        
-        body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background: #f8fafc;
-        }
-        
         .header-bg {
-            background: linear-gradient(135deg, var(--azul-principal), var(--azul-escuro));
+            background: linear-gradient(135deg, #0056A6, #003D7A);
         }
         
         .form-card {
@@ -37,12 +27,12 @@
         }
         
         .input-form:focus {
-            border-color: var(--azul-principal);
+            border-color: #0056A6;
             box-shadow: 0 0 0 3px rgba(0, 86, 166, 0.1);
         }
         
         .btn-primary {
-            background: linear-gradient(135deg, var(--azul-principal), var(--azul-escuro));
+            background: linear-gradient(135deg, #0056A6, #003D7A);
             color: white;
             font-weight: 600;
             padding: 12px 24px;
@@ -57,8 +47,8 @@
         
         .btn-secondary {
             background: white;
-            color: var(--azul-principal);
-            border: 2px solid var(--azul-principal);
+            color: #0056A6;
+            border: 2px solid #0056A6;
             font-weight: 600;
             padding: 10px 22px;
             border-radius: 8px;
@@ -66,19 +56,18 @@
         }
         
         .btn-secondary:hover {
-            background: var(--azul-principal);
+            background: #0056A6;
             color: white;
         }
     </style>
 </head>
-<body>
+<body class="bg-gray-50">
     <!-- Header -->
     <header class="header-bg text-white">
         <div class="container mx-auto px-4 py-4">
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-3">
-                    <!-- Link para voltar ao Dashboard -->
-                    <a href="index.html" class="text-white hover:text-gray-200">
+                    <a href="app.html" class="text-white hover:text-gray-200">
                         <i class="fas fa-arrow-left"></i>
                     </a>
                     <div>
@@ -295,7 +284,6 @@
 
                     <!-- Botões -->
                     <div class="flex flex-col sm:flex-row gap-4 pt-6 border-t">
-                        <!-- Botão Cancelar volta para Dashboard -->
                         <button type="button" 
                                 class="btn-secondary flex-1"
                                 onclick="window.location.href='app.html'">
@@ -322,22 +310,21 @@
         document.getElementById('formPaciente').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Simula o cadastro
             const btn = this.querySelector('button[type="submit"]');
             const originalText = btn.innerHTML;
             btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Cadastrando...';
             btn.disabled = true;
             
-            // Simula delay do cadastro
             setTimeout(() => {
                 alert('Paciente cadastrado com sucesso!');
                 btn.innerHTML = originalText;
                 btn.disabled = false;
                 this.reset();
                 
-                // Opção para ir direto para agendamento
                 const redirecionar = confirm('Deseja agendar uma consulta para este paciente?');
                 if (redirecionar) {
+                    window.location.href = 'agendamento-consulta.html';
+                } else {
                     window.location.href = 'app.html';
                 }
             }, 2000);
