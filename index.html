@@ -52,7 +52,6 @@
             box-shadow: 0 0 0 3px rgba(0, 86, 166, 0.1);
         }
         
-        /* Mensagem de feedback */
         .feedback-message {
             display: none;
             padding: 12px;
@@ -81,7 +80,7 @@
             <div class="w-16 h-16 bg-[#0056A6] rounded-2xl flex items-center justify-center mx-auto mb-4">
                 <i class="fas fa-hospital-alt text-white text-2xl"></i>
             </div>
-            <h1 class="text-2xl font-bold text-gray-800">SGHSS</h1>
+            <h1 class="text-2xl font-bold text-gray-800">VidaPlus</h1>
             <p class="text-gray-600 mt-2">Sistema de Gestão Hospitalar</p>
         </div>
 
@@ -139,16 +138,16 @@
                 <i class="fas fa-info-circle text-[#0056A6] mr-2"></i>
                 Usuários para teste:
             </p>
-            <!-- <div class="text-xs text-gray-500 space-y-1">
-                <p><span class="font-medium">Administrador:</span> admin / senha123</p>
+            <div class="text-xs text-gray-500 space-y-1">
+                <p><span class="font-medium">Administrador:</span> admin / admin123</p>
                 <p><span class="font-medium">Médico:</span> medico / medico123</p>
                 <p><span class="font-medium">Recepcionista:</span> recepcao / recepcao123</p>
-            </div>-->
+            </div>
         </div>
 
         <!-- Informações -->
         <div class="mt-6 text-center text-xs text-gray-500">
-            <p>© 2024 SGHSS - Sistema de Gestão Hospitalar</p>
+            <p>© 2024 VidaPlus - Sistema de Gestão Hospitalar</p>
             <p class="mt-1">Versão 2.0</p>
         </div>
     </div>
@@ -162,7 +161,6 @@
             const feedbackDiv = document.getElementById('feedback');
             const feedbackText = document.getElementById('feedback-text');
             
-            // Usuários válidos para teste
             const usuariosValidos = {
                 'admin': 'admin123',
                 'medico': 'medico123',
@@ -174,7 +172,6 @@
             const usuario = usuarioInput.value.trim();
             const senha = senhaInput.value.trim();
             
-            // Mostrar mensagem de erro se campos vazios
             if (!usuario || !senha) {
                 feedbackText.innerHTML = 'Por favor, preencha todos os campos.';
                 feedbackDiv.className = 'feedback-message feedback-error';
@@ -182,28 +179,22 @@
                 return;
             }
             
-            // Verificar se o usuário existe
             if (usuariosValidos[usuario.toLowerCase()]) {
-                // Verificar senha
                 if (senha === usuariosValidos[usuario.toLowerCase()]) {
-                    // Login válido
                     const btn = this.querySelector('button');
                     const originalText = btn.innerHTML;
                     btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Entrando...';
                     btn.disabled = true;
                     
-                    // Mostrar mensagem de sucesso
                     feedbackText.innerHTML = 'Login realizado com sucesso! Redirecionando...';
                     feedbackDiv.className = 'feedback-message feedback-success';
                     feedbackDiv.style.display = 'block';
                     
-                    // Redirecionar após 1.5 segundos
                     setTimeout(() => {
                         window.location.href = 'app.html';
                     }, 1500);
                     
                 } else {
-                    // Senha incorreta
                     feedbackText.innerHTML = 'Senha incorreta. Tente novamente.';
                     feedbackDiv.className = 'feedback-message feedback-error';
                     feedbackDiv.style.display = 'block';
@@ -211,7 +202,6 @@
                     senhaInput.focus();
                 }
             } else {
-                // Usuário não existe
                 feedbackText.innerHTML = 'Usuário não encontrado.';
                 feedbackDiv.className = 'feedback-message feedback-error';
                 feedbackDiv.style.display = 'block';
@@ -221,7 +211,6 @@
             }
         });
         
-        // Limpar mensagem de erro ao começar a digitar
         document.getElementById('usuario').addEventListener('input', function() {
             document.getElementById('feedback').style.display = 'none';
         });
